@@ -3,8 +3,8 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 800;
-canvas.height = 600;
+canvas.width = 540;
+canvas.height = 540;
 
 let lastTime = null;
 const input = {};
@@ -12,8 +12,8 @@ const squares = [];
 for (let i=0;i<9;i++) {
   for (let j=0;j<9;j++) {
     squares.push({
-      x:(i*60+32), 
-      y:(j*60+32), 
+      x:(i*60+2), 
+      y:(j*60+2), 
       col:i, 
       row:j,
       value: 0,
@@ -37,6 +37,15 @@ window.addEventListener("blur", () => {
     for (const key in input) {
         input[key] = false;
     }
+});
+
+canvas.addEventListener("mousedown", (event) => {
+  const rect = canvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+  const row = Math.floor(y/60)
+  const col = Math.floor(x/60)
+  selectSquare(x,y)
 });
 
 function drawSquares(ctx) {
