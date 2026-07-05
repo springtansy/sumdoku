@@ -100,6 +100,7 @@ document.addEventListener("keydown", (event) => {
         if (!selectedSquare) return;
         if (notes) {
             selectedSquare.notes = [];
+            return;
         }
         selectedSquare.value = 0;
         return;
