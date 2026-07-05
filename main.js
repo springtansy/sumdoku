@@ -98,6 +98,9 @@ document.addEventListener("keydown", (event) => {
         event.key === "Delete"
     ) {
         if (!selectedSquare) return;
+        if (notes) {
+            selectedSquare.notes = [];
+        }
         selectedSquare.value = 0;
         return;
     }
