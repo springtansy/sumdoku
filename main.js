@@ -36,12 +36,12 @@ class Square {
             ctx.fillText(this.value,this.x+28,this.y+30);
         } else {
             ctx.fillStyle = "#000000";
-            ctx.font = "italic 10px Verdana";
+            ctx.font = "10px Verdana";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             for (const note of this.notes) {
-                const xOffset = 13+(note%3)*15;
-                const yOffset = 14+(Math.floor(note/3))*15;
+                const xOffset = 19+((note-1)%3)*12;
+                const yOffset = 20+(Math.floor((note-1)/3))*12;
                 ctx.fillText(note,this.x+xOffset,this.y+yOffset);
             }
         }
