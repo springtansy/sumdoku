@@ -25,8 +25,12 @@ class Square {
     }
 
     draw(ctx) {
-        ctx.fillStyle = this.selected ? "#cfcfcf" : "white";
+        ctx.fillStyle = this.selected ? "#cfcfcf" : "#ffffff";
         ctx.fillRect(this.x, this.y, 56, 56);
+        if (this.value !== 0) {
+            this.fillStyle = "#000000";
+            this.font = "50px Cambria";
+            this.fillText(this.value),this.x+3,this.y+3,50);
     }
 }
 
