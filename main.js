@@ -32,7 +32,7 @@ window.addEventListener("blur", () => {
 
 function drawSquares(ctx) {
   ctx.fillStyle = "white"
-  for (const square in squares) {
+  for (const square of squares) {
     ctx.fillRect(square.x,square.y,56,56)
   }
 }
