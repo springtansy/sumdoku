@@ -11,7 +11,7 @@ const input = {};
 const squares = [];
 for (let i=0;i<9;i++) {
   for (let j=0;j<9;j++) {
-    squares.push({x:(i*60+32), y:(j*60+32), i:i, j:j)
+    squares.push({x:(i*60+32), y:(j*60+32), i:i, j:j})
   }
 }
 
