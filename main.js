@@ -18,7 +18,7 @@ class Square {
         this.x = col * 60 + 2;
         this.y = row * 60 + 2;
 
-        this.value = 0;
+        this.value = 2;
         this.notes = [];
         this.cage = -1;
         this.selected = false;
@@ -31,6 +31,7 @@ class Square {
             this.fillStyle = "#000000";
             this.font = "50px Arial";
             this.fillText(this.value,this.x+3,this.y+3,50);
+        }
     }
 }
 
