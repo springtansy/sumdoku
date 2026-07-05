@@ -18,7 +18,7 @@ class Square {
         this.x = col * 60 + 2;
         this.y = row * 60 + 2;
 
-        this.value = Math.random(1,9);
+        this.value = Math.floor(Math.random()*10);
         this.notes = [];
         this.cage = -1;
         this.selected = false;
