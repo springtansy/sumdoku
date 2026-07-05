@@ -9,19 +9,11 @@ canvas.height = 540;
 let lastTime = null;
 const input = {};
 const squares = [];
-for (let i=0;i<9;i++) {
-  for (let j=0;j<9;j++) {
-    squares.push({
-      x:(i*60+2), 
-      y:(j*60+2), 
-      col:i, 
-      row:j,
-      value: 0,
-      notes: [],
-      cage: -1,
-      selected: false
-    });
-  }
+
+for (let row = 0; row < 9; row++) {
+    for (let col = 0; col < 9; col++) {
+        squares.push(new Square(col, row));
+    }
 }
 
 document.addEventListener("keydown", (event) => {
@@ -39,6 +31,26 @@ window.addEventListener("blur", () => {
     }
 });
 
+class Square {
+    constructor(col, row) {
+        this.col = col;
+        this.row = row;
+
+        this.x = col * 60 + 2;
+        this.y = row * 60 + 2;
+
+        this.value = 0;
+        this.notes = [];
+        this.cage = -1;
+        this.selected = false;
+    }
+
+    draw(ctx) {
+        ctx.fillStyle = this.selected ? "#cfcfcf" : "white";
+        ctx.fillRect(this.x, this.y, 56, 56);
+    }
+}
+
 canvas.addEventListener("mousedown", (event) => {
   const rect = canvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
@@ -49,9 +61,8 @@ canvas.addEventListener("mousedown", (event) => {
 });
 
 function drawSquares(ctx) {
-  ctx.fillStyle = "white"
   for (const square of squares) {
-    ctx.fillRect(square.x,square.y,56,56)
+    square.draw(ctx)
   }
 }
 
@@ -63,7 +74,7 @@ function update(dt) {
     
 }
 
-function draw() {
+function draw(ctx) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawSquares(ctx);
 }
@@ -79,7 +90,7 @@ function gameLoop(timestamp) {
     dt = Math.min(dt, 0.05);
 
     update(dt);
-    draw();
+    draw(ctx);
 
     requestAnimationFrame(gameLoop);
 }
