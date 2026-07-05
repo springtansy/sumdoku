@@ -18,7 +18,7 @@ class Square {
         this.x = col * 60 + 2;
         this.y = row * 60 + 2;
 
-        this.value = 2;
+        this.value = Math.random(1,9);
         this.notes = [];
         this.cage = -1;
         this.selected = false;
@@ -32,7 +32,7 @@ class Square {
             ctx.font = "bold 40px Verdana";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
-            ctx.fillText(this.value,this.x+28,this.y+28);
+            ctx.fillText(this.value,this.x+28,this.y+30);
         }
     }
 }
