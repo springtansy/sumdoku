@@ -10,6 +10,40 @@ let lastTime = null;
 const input = {};
 const squares = [];
 
+class Square {
+    constructor(col, row) {
+        this.col = col;
+        this.row = row;
+
+        this.x = col * 60 + 2;
+        this.y = row * 60 + 2;
+
+        this.value = 0;
+        this.notes = [];
+        this.cage = -1;
+        this.selected = false;
+    }
+
+    draw(ctx) {
+        ctx.fillStyle = this.selected ? "#cfcfcf" : "white";
+        ctx.fillRect(this.x, this.y, 56, 56);
+    }
+}
+
+function selectSquare(col, row) {
+    for (const square of squares) {
+        square.selected = false;
+    }
+
+    const square = squares.find(
+        s => s.col === col && s.row === row
+    );
+
+    if (square) {
+        square.selected = true;
+    }
+}
+
 for (let row = 0; row < 9; row++) {
     for (let col = 0; col < 9; col++) {
         squares.push(new Square(col, row));
@@ -31,33 +65,18 @@ window.addEventListener("blur", () => {
     }
 });
 
-class Square {
-    constructor(col, row) {
-        this.col = col;
-        this.row = row;
-
-        this.x = col * 60 + 2;
-        this.y = row * 60 + 2;
-
-        this.value = 0;
-        this.notes = [];
-        this.cage = -1;
-        this.selected = false;
-    }
-
-    draw(ctx) {
-        ctx.fillStyle = this.selected ? "#cfcfcf" : "white";
-        ctx.fillRect(this.x, this.y, 56, 56);
-    }
-}
-
 canvas.addEventListener("mousedown", (event) => {
-  const rect = canvas.getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
-  const row = Math.floor(y/60)
-  const col = Math.floor(x/60)
-  selectSquare(x,y)
+    const rect = canvas.getBoundingClientRect();
+
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    const col = Math.floor(x / 60);
+    const row = Math.floor(y / 60);
+
+    if (col >= 0 && col < 9 && row >= 0 && row < 9) {
+        selectSquare(col, row);
+    }
 });
 
 function drawSquares(ctx) {
