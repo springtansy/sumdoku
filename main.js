@@ -29,7 +29,7 @@ class Square {
         ctx.fillRect(this.x, this.y, 56, 56);
         if (this.value !== 0) {
             ctx.fillStyle = "#000000";
-            ctx.font = "bold 40px Georgia";
+            ctx.font = "bold 40px Cambria";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillText(this.value,this.x+28,this.y+28);
