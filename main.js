@@ -7,6 +7,7 @@ canvas.width = 540;
 canvas.height = 540;
 
 let lastTime = null;
+let notes = false;
 let selectedSquare = null;
 const squares = [];
 
@@ -33,6 +34,26 @@ class Square {
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillText(this.value,this.x+28,this.y+30);
+        } else {
+            ctx.fillStyle = "#000000";
+            ctx.font = "italic 10px Verdana";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            for (const note of this.notes) {
+                const xOffset = 13+(note%3)*15;
+                const yOffset = 14+(Math.floor(note/3))*15;
+                ctx.fillText(note,this.x+xOffset,this.y+yOffset);
+            }
+        }
+    }
+
+    toggleNote(key) {
+        const index = this.notes.indexOf(key);
+        
+        if (index !== -1) {
+            this.notes.splice(index, 1);
+        } else {
+            this.notes.push(key);
         }
     }
 }
@@ -58,18 +79,27 @@ for (let row = 0; row < 9; row++) {
 }
 
 document.addEventListener("keydown", (event) => {
-    if (!selectedSquare) return;
-
-    if (event.key >= "1" && event.key <= "9") {
-        selectedSquare.value = Number(event.key);
+    if (event.key.toLowerCase() === "n") {
+        notes = !notes;
+        return;
     }
-
+    if (event.key >= "1" && event.key <= "9") {
+        if (!selectedSquare) return;
+        if (notes) {
+            selectedSquare.toggleNote(Number(event.key));
+            return;
+        }
+        selectedSquare.value = Number(event.key);
+        return;
+    }
     if (
         event.key === "0" ||
         event.key === "Backspace" ||
         event.key === "Delete"
     ) {
+        if (!selectedSquare) return;
         selectedSquare.value = 0;
+        return;
     }
 });
 
