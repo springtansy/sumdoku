@@ -28,9 +28,9 @@ class Square {
         ctx.fillStyle = this.selected ? "#cfcfcf" : "#ffffff";
         ctx.fillRect(this.x, this.y, 56, 56);
         if (this.value !== 0) {
-            this.fillStyle = "#000000";
-            this.font = "50px Arial";
-            this.fillText(this.value,this.x+3,this.y+3,50);
+            ctx.fillStyle = "#000000";
+            ctx.font = "50px Arial";
+            ctx.fillText(this.value,this.x+3,this.y+3,50);
         }
     }
 }
