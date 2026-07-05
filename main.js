@@ -11,7 +11,7 @@ const input = {};
 const squares = [];
 for (let i=0;i<9;i++) {
   for (let j=0;j<9;j++) {
-    squares.push({x:(i*60+30), y:(j*60+30), i:i, j:j)
+    squares.push({x:(i*60+32), y:(j*60+32), i:i, j:j)
   }
 }
 
@@ -30,8 +30,10 @@ window.addEventListener("blur", () => {
     }
 });
 
-function drawEmptySquares {
+function drawSquares(ctx) {
+  ctx.fillStyle = "white"
   for (const square in squares) {
+    ctx.fillRect(square.x,square.y,56,56)
   }
 }
 
@@ -44,7 +46,8 @@ function update(dt) {
 }
 
 function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawSquares(ctx)
 }
 
 function gameLoop(timestamp) {
