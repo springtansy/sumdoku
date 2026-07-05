@@ -7,7 +7,7 @@ canvas.width = 540;
 canvas.height = 540;
 
 let lastTime = null;
-const input = {};
+let selectedSquare = null;
 const squares = [];
 
 class Square {
@@ -18,7 +18,7 @@ class Square {
         this.x = col * 60 + 2;
         this.y = row * 60 + 2;
 
-        this.value = Math.floor(Math.random()*10);
+        this.value = 0;
         this.notes = [];
         this.cage = -1;
         this.selected = false;
@@ -42,12 +42,12 @@ function selectSquare(col, row) {
         square.selected = false;
     }
 
-    const square = squares.find(
+    selectedSquare = squares.find(
         s => s.col === col && s.row === row
     );
 
-    if (square) {
-        square.selected = true;
+    if (selectedSquare) {
+        selectedSquare.selected = true;
     }
 }
 
@@ -58,17 +58,18 @@ for (let row = 0; row < 9; row++) {
 }
 
 document.addEventListener("keydown", (event) => {
-    const key = event.key;
-    input[key] = true;
-});
+    if (!selectedSquare) return;
 
-document.addEventListener("keyup", (event) => {
-    input[event.key.toLowerCase()] = false;
-});
+    if (event.key >= "1" && event.key <= "9") {
+        selectedSquare.value = Number(event.key);
+    }
 
-window.addEventListener("blur", () => {
-    for (const key in input) {
-        input[key] = false;
+    if (
+        event.key === "0" ||
+        event.key === "Backspace" ||
+        event.key === "Delete"
+    ) {
+        selectedSquare.value = 0;
     }
 });
 
