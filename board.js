@@ -77,8 +77,25 @@ class Board {
     }
 
     draw(ctx) {
+
         for (const square of this.squares) {
             square.draw(ctx);
+        }
+
+        for (let i = 0; i <= 9; i++) {
+
+            ctx.strokeStyle = (i % 3 === 0) ? "#000000" : "#b0b0b0";
+            ctx.lineWidth = 2;
+
+            ctx.beginPath();
+            ctx.moveTo(i * 60, 0);
+            ctx.lineTo(i * 60, 540);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(0, i * 60);
+            ctx.lineTo(540, i * 60);
+            ctx.stroke();
         }
     }
 
